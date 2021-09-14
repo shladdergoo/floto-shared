@@ -42,6 +42,14 @@ resource "aws_iam_user_policy" "ci-service-policy" {
           "ecr:GetAuthorizationToken"
         ],
         "Resource" : "*"
+      },
+      {
+        "Sid" : "LambdaUpdatePolicy",
+        "Effect" : "Allow",
+        "Action" : [
+          "lambda:UpdateFunctionCode"
+        ],
+        "Resource" : "*"
       }
     ]
   })

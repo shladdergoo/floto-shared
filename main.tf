@@ -7,13 +7,9 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_ecr_repository" "note-processor-image-repo" {
-  name                 = "${var.app_name}-${var.note_processor_function_name}"
-  image_tag_mutability = "MUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = false
-  }
+module "lambda-ecr-repo" {
+  source    = "./modules/lambda_ecr_repo"
+  repo_name = "${var.app_name}-${var.note_processor_function_name}"
 }
 
 module "iam" {
